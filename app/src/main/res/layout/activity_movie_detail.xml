@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/moviedetaillayout"
+    android:background="@color/detailback"
+    tools:context=".MovieDetail">
+
+<android.support.v4.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/colorback"
+        android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/poster"
+        android:layout_width="250px"
+        android:layout_height="350px"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="15dp"
+        app:srcCompat="@android:drawable/alert_dark_frame" />
+
+    <TextView
+        android:id="@+id/movietitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/poster"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:textSize="16dp"
+        android:textColor="@color/primary_text"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/dateruntime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/movietitle"
+        android:layout_marginLeft="10dp"
+        android:textSize="12dp"
+        android:textColor="@color/primary_text"
+        android:layout_toRightOf="@+id/poster" />
+
+    <!--<Button-->
+        <!--android:id="@+id/addtowatched"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_marginTop="77dp" />-->
+
+    <Button
+        android:id="@+id/watchlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/poster"
+        android:drawableTop="@drawable/addplaylist"
+        android:textAlignment="viewEnd"
+        android:text="Add to watchlist"
+        android:textAllCaps="false"
+        android:layout_marginLeft="10dp"
+        android:textSize="12dp"
+        style="?android:attr/borderlessButtonStyle"
+         />
+
+    <Button
+        android:id="@+id/collection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/poster"
+        android:layout_alignParentRight="true"
+        android:drawableTop="@drawable/collection"
+        android:layout_marginRight="20dp"
+        android:textAlignment="viewEnd"
+        android:text="Add to collection"
+        android:textAllCaps="false"
+        android:textSize="12dp"
+        style="?android:attr/borderlessButtonStyle"
+        />
+
+    <View style="@style/Divider"
+        android:id="@+id/aftercollection"
+        android:layout_below="@id/watchlist"
+        android:layout_marginTop="5dp"
+        />
+
+    <Button
+        android:id="@+id/checkin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/aftercollection"
+        android:textAlignment="textStart"
+        android:text="  Check in"
+        android:drawableLeft="@drawable/play"
+        android:textAllCaps="false"
+        android:textSize="14dp"
+        style="?android:attr/borderlessButtonStyle"
+         />
+
+    <Button
+        android:id="@+id/stream"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkin"
+        android:textAlignment="textStart"
+        android:text="  Stream or purchase"
+        android:drawableLeft="@drawable/play"
+        android:textAllCaps="false"
+        android:textSize="14dp"
+        style="?android:attr/borderlessButtonStyle"
+        />
+
+    <View style="@style/Divider"
+        android:id="@+id/afterstream"
+        android:layout_below="@id/stream"
+        android:layout_marginTop="5dp"
+        />
+
+    <Button
+        android:id="@+id/contentlanguage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/poster"
+        android:layout_below="@+id/afterstream"
+        android:textAlignment="textStart"
+        android:paddingTop="5dp"
+        android:text="  English"
+        android:drawableLeft="@drawable/language"
+        android:textAllCaps="false"
+        android:textSize="14dp"
+        style="?android:attr/borderlessButtonStyle"
+      />
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/primary_text"
+        android:layout_below="@+id/contentlanguage"
+        android:layout_alignStart="@+id/poster"
+        android:layout_marginRight="10dp"
+        android:text="TextView" />
+
+    <View style="@style/Divider"
+        android:layout_below="@id/desc"
+        android:layout_marginTop="5dp"
+        />
+    <RelativeLayout
+        android:id="@+id/rate"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@id/desc"
+        android:layout_marginTop="15dp"
+        >
+        <TextView
+            android:id="@+id/tmdbrating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary_text"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="75dp"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:text="6.6"
+            />
+
+        <TextView
+            android:id="@+id/tmdbvotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary_text"
+            android:textSize="10dp"
+            android:layout_toRightOf="@+id/tmdbrating"
+            android:text="1503 votes"
+            android:layout_marginLeft="2dp"
+            android:layout_alignBottom="@+id/tmdbrating"
+            />
+        <TextView
+            android:id="@+id/tmdb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary_text"
+            android:textSize="12dp"
+            android:layout_marginLeft="75dp"
+            android:layout_below="@+id/tmdbrating"
+            android:text="TMDb"
+            />
+
+        <TextView
+            android:id="@+id/traktrating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="7.3"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/tmdbvotes"
+            android:textColor="@color/primary_text"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            />
+        <TextView
+            android:id="@+id/traktvotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary_text"
+            android:layout_marginLeft="2dp"
+            android:textSize="10dp"
+            android:layout_toRightOf="@+id/traktrating"
+            android:text="2666 votes"
+            android:layout_alignBottom="@+id/traktrating"
+            />
+        <TextView
+            android:id="@+id/trakt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary_text"
+            android:textSize="12dp"
+            android:text="trakt"
+            android:layout_below="@+id/traktrating"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/tmdbvotes"
+            />
+        <TextView
+            android:id="@+id/ratehere"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RATE"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:layout_alignLeft="@+id/tmdbvotes"
+            android:layout_marginLeft="37dp"
+            android:layout_below="@+id/tmdb"
+            android:textColor="@color/primary_text"
+            android:layout_marginTop="10dp"
+            />
+
+        <TextView
+            android:id="@+id/yourrating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your rating"
+            android:layout_alignLeft="@+id/tmdbvotes"
+            android:layout_marginLeft="30dp"
+            android:textSize="12dp"
+            android:layout_below="@+id/ratehere"
+            android:textColor="@color/primary_text"
+            android:layout_marginTop="10dp"
+            />
+    </RelativeLayout>
+
+    <View style="@style/Divider"
+        android:id="@+id/belowrate"
+        android:layout_below="@id/rate"
+        android:layout_marginTop="5dp"
+        />
+    <TextView
+        android:id="@+id/genrestitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/belowrate"
+        android:textColor="@color/primary_text"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:text="Genres"
+        android:layout_alignStart="@+id/poster"
+        />
+    <TextView
+        android:id="@+id/genres"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/genrestitle"
+        android:textColor="@color/primary_text"
+        android:layout_marginTop="5dp"
+        android:text="Genres"
+        android:layout_alignStart="@+id/poster"
+        />
+    <TextView
+        android:id="@+id/casttitle"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/genres"
+        android:textColor="@color/primary_text"
+        android:layout_marginTop="20dp"
+        android:text="Cast"
+        android:layout_alignStart="@+id/poster"
+        />
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="190dp"
+            android:id="@+id/castlist"
+            android:layout_below="@+id/casttitle"
+            android:layout_alignStart="@+id/poster"
+            android:divider="@null"
+            >
+        </ListView>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/castshowall"
+            android:text="Show All"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/castlist"
+            android:textColor="@color/showallbutton"
+            style="?android:attr/borderlessButtonStyle"
+            />
+        <TextView
+            android:id="@+id/crewtitle"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/castshowall"
+            android:textColor="@color/primary_text"
+            android:layout_marginTop="20dp"
+            android:text="Crew"
+            android:layout_alignStart="@+id/poster"
+            />
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="190dp"
+            android:id="@+id/crewlist"
+            android:layout_below="@+id/crewtitle"
+            android:divider="@null"
+            android:layout_alignStart="@+id/poster"
+            >
+        </ListView>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/crewshowall"
+            android:text="Show All"
+            android:textColor="@color/showallbutton"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/crewlist"
+            style="?android:attr/borderlessButtonStyle"
+            />
+    </RelativeLayout>
+</android.support.v4.widget.NestedScrollView>
+</RelativeLayout>

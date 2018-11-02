@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/popular"
+        android:text="Popular"
+        />
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/digital"
+        android:layout_toRightOf="@+id/popular"
+        android:layout_marginLeft="5dp"
+        android:text="Digital release"
+        />
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/disc"
+        android:text="disc release"
+        android:layout_below="@+id/popular"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="In theaters"
+        android:id="@+id/theater"
+        android:layout_below="@+id/disc"
+        android:layout_marginTop="10dp"
+        android:textSize="16dp"
+        android:textColor="@color/primary_text"
+        android:layout_marginLeft="3dp"
+        />
+</RelativeLayout>

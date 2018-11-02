@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/filter"
+        android:title=""
+        android:icon="@drawable/filter"
+        app:showAsAction="always"
+        />
+    <item android:id="@+id/cal"
+        android:title=""
+        android:icon="@drawable/eye"
+        app:showAsAction="always"
+        />
+    <item android:id="@+id/search"
+        android:title=""
+        android:icon="@drawable/search"
+        app:showAsAction="always"
+        />
+    <item android:id="@+id/add"
+        android:title="Add show" />
+    <item android:id="@+id/sort"
+        android:title="Sort shows">
+    <menu>
+        <item android:id="@+id/title"
+            android:title="Title" />
+        <item android:id="@+id/latest"
+            android:title="Latest episode" />
+        <item android:id="@+id/oldest"
+            android:title="Oldest episode" />
+        <item android:id="@+id/last"
+            android:title="Last watched" />
+        <item android:id="@+id/renaming"
+            android:title="Renaming episodes" />
+        <item android:id="@+id/favfirst"
+            android:title="Favorites first" />
+        <item android:id="@+id/ignorearticle"
+            android:title="Ignore articles" />
+    </menu>
+    </item>
+    <item android:id="@+id/refresh"
+        android:title="Refresh" />
+    <item android:id="@+id/sync"
+        android:title="Sync manually" >
+        <menu>
+            <item android:id="@+id/syncupdate"
+                android:title="Sync  &amp; Update" />
+            <item android:id="@+id/syncdownload"
+                android:title="Sync  &amp; Download all" />
+        </menu>
+    </item>
+</menu>

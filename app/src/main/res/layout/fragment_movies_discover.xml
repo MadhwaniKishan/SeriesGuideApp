@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    tools:context=".MoviesDiscoverFragment"
+    android:layout_height="match_parent">
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/popular"
+        android:text="Popular"
+        android:layout_marginTop="5dp"
+        android:background="@color/buttoncolor"
+        style="?android:attr/borderlessButtonStyle"
+        />
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/digital"
+        android:layout_toRightOf="@+id/popular"
+        android:layout_marginLeft="5dp"
+        android:text="Digital release"
+        android:layout_marginTop="5dp"
+        android:background="@color/buttoncolor"
+        style="?android:attr/borderlessButtonStyle"
+        />
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/disc"
+        android:text="disc release"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/popular"
+        android:background="@color/buttoncolor"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="In theaters"
+        android:id="@+id/theater"
+        android:layout_below="@+id/disc"
+        android:layout_marginTop="10dp"
+        android:textSize="16dp"
+        android:textColor="@color/primary_text"
+        android:layout_marginLeft="3dp"
+        />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/theater_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/theater"
+         >
+
+    </android.support.v7.widget.RecyclerView>
+    </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</RelativeLayout>

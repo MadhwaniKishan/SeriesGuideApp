@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/movies_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:minHeight="72dp"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+
+    <ImageView
+        android:id="@+id/poster"
+        android:layout_width="300px"
+        android:layout_height="450px"
+        android:layout_centerInParent="true" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/buttoncolor"
+    >
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="Default"
+        android:layout_marginLeft="3dp"
+        android:textColor="@color/primary_text"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textSize="14dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:textColor="@color/primary_text"
+            android:textSize="10dp"
+            />
+        <Button
+            android:id="@+id/popup"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:text=""
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="2dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/more"
+            android:layout_marginBottom="5dp"
+            android:onClick="showPopup" />
+    </RelativeLayout>
+</LinearLayout>
+
+</LinearLayout>

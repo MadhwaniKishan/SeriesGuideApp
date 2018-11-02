@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:gravity="left"
+    android:layout_marginTop="20dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+    android:orientation="vertical"
+    >
+
+    <Button
+        android:id="@+id/trakt"
+        android:textSize="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:gravity="left"
+        android:layout_marginTop="10dp"
+        android:text="trakt\nConnect trakt"
+        android:textAllCaps="false"
+
+        android:padding="10dp"
+        style="?android:attr/colorFocusedHighlight"
+        />
+
+    <Button
+        android:id="@+id/sigin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@color/colorPrimary"
+        android:gravity="left"
+        android:padding="10dp"
+        android:text="SeriesGuide Cloud\nSign In"
+        android:textAllCaps="false"
+        style="?android:attr/colorFocusedHighlight"
+        android:layout_marginBottom="2dp"
+        />
+</LinearLayout>

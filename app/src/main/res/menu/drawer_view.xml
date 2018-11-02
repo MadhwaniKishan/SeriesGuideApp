@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+            <group android:id="@+id/group1"
+                android:checkableBehavior="single">
+                <item
+                    android:id="@+id/shows"
+                    android:icon="@drawable/shows"
+                    android:title="Shows" />
+                <item
+                    android:id="@+id/lists"
+                    android:icon="@drawable/list"
+                    android:title="Lists" />
+                <item
+                    android:id="@+id/movies"
+                    android:icon="@drawable/movie"
+                    android:title="Movies" />
+                <item
+                    android:id="@+id/statistics"
+                    android:icon="@drawable/statistics"
+                    android:title="Statistics" />
+            </group>
+
+            <group android:id="@+id/group2"
+                android:checkableBehavior="single">
+                <item
+                    android:id="@+id/settings"
+                    android:icon="@drawable/setting"
+                    android:title="Settings" />
+                <item
+                    android:id="@+id/help"
+                    android:icon="@drawable/help"
+                    android:title="Help &amp; Feedback" />
+                <item
+                    android:id="@+id/unlock"
+                    android:icon="@drawable/unlock"
+                    android:title="Unlock all features" />
+            </group>
+</menu>
