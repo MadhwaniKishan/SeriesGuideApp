@@ -41,7 +41,7 @@ public class NavigationDrawer extends AppCompatActivity {
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         nvDrawer=findViewById(R.id.nav_view);
         ctx=getApplicationContext();
-       // this.deleteDatabase("SeriesGuide.db");
+        //this.deleteDatabase("SeriesGuide.db");
 
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.content_frame, new ShowsMainFragment()).commitNow();

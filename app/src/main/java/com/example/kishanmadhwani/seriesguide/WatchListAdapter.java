@@ -92,7 +92,7 @@ public static class WatchListViewHolder extends RecyclerView.ViewHolder implemen
         holder.movieTitle.setText(watchlist.get(position).getTitle());
         Log.d("movietitle",watchlist.get(position).getTitle());
           holder.date.setText(formattedDate);
-       poster=loadImageFromStorage(watchlist.get(position).getPosterpath(),watchlist.get(position).getPosterpath().substring(1));
+       poster=loadImageFromStorage(watchlist.get(position).getPosterpath());
         Glide.with(context)
                 .load(poster)
                 .into(holder.iv)
@@ -103,11 +103,12 @@ public static class WatchListViewHolder extends RecyclerView.ViewHolder implemen
     public int getItemCount() {
         return watchlist.size();
     }
-    private Bitmap loadImageFromStorage(String path,String name)
+
+    private Bitmap loadImageFromStorage(String path)
     {
         Bitmap b=null;
         try {
-            File f=new File(path, "profile.jpg");
+            File f=new File("/data/user/0/com.example.kishanmadhwani.seriesguide/app_imageDir", path);
             Log.d("path",path);
             b= BitmapFactory.decodeStream(new FileInputStream(f));
         }

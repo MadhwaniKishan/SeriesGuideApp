@@ -126,7 +126,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
                                  values = new ContentValues();
                                 values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE, movies.get(position).getTitle());
                                 values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_DATE, movies.get(position).getReleaseDate());
-                                values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_POSTERPATH,posterpath);
+                                values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_POSTERPATH,name);
                                 long newRowId = db.insert(FeedReaderContract.FeedEntry.TABLE_NAME, null, values);
                                 Log.d("rowinserted",newRowId+"");
                                 //values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_COLLECTION, 1);
@@ -192,10 +192,11 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
 
     private String saveToInternalStorage(Bitmap bitmapImage,String name){
         ContextWrapper cw = new ContextWrapper(context);
+        Log.d("nameimage",name);
         // path to /data/data/yourapp/app_data/imageDir
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
         // Create imageDir
-        File mypath=new File(directory,"profile.jpg");
+        File mypath=new File(directory,name);
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(mypath);
@@ -210,6 +211,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
                 e.printStackTrace();
             }
         }
-        return directory.getAbsolutePath();
+        return directory.getAbsolutePath()+"/"+name;
     }
 }
