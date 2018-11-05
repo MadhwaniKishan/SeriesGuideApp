@@ -1,6 +1,7 @@
 package com.example.kishanmadhwani.seriesguide;
 
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -54,6 +55,7 @@ public class MoviesMainFragment extends Fragment {
     }
     @Override
     public void onCreateOptionsMenu (Menu menu, MenuInflater inflater) {
+        menu.clear();
         inflater.inflate(R.menu.moviemainmenu, menu);
         menu.findItem(R.id.refresh).setVisible(false);
         menu.findItem(R.id.filter).setVisible(false);

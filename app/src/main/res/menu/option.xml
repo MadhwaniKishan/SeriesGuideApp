@@ -2,15 +2,62 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/filter"
-        android:title=""
+        android:title="filter"
         android:icon="@drawable/filter"
         app:showAsAction="always"
-        />
+        >
+        <menu>
+            <item android:id="@+id/fav"
+                android:title="Favorites"
+                android:checkable="true"
+                />
+            <item android:id="@+id/unwatched"
+                android:title="Unwatched"
+                android:checkable="true"
+                />
+            <item android:id="@+id/upcoming"
+                android:title="Upcoming"
+                android:checkable="true"
+                />
+            <item android:id="@+id/hidden"
+                android:title="Hidden"
+                android:checkable="true"
+                />
+            <item android:id="@+id/removefilters"
+                android:title="Remove all filters" />
+            <item android:id="@+id/upcomingrange"
+                android:title="Upcoming range" />
+        </menu>
+    </item>
     <item android:id="@+id/cal"
         android:title=""
         android:icon="@drawable/eye"
         app:showAsAction="always"
-        />
+        >
+        <menu>
+        <item android:id="@+id/favshows"
+            android:title="Only favorite shows"
+            android:checkable="true"
+            />
+            <item android:id="@+id/collected"
+                android:title="Only collected episodes"
+                android:checkable="true"
+                />
+            <item android:id="@+id/hidewatched"
+                android:title="Hide watched episodes"
+                android:checkable="true"
+                android:checked="true"
+                />
+            <item android:id="@+id/hidespecial"
+                android:title="Hide special episodes"
+                android:checkable="true"
+                />
+            <item android:id="@+id/infinitecalendar"
+                android:title="Infinite calendar"
+                android:checkable="true"
+                />
+        </menu>
+    </item>
     <item android:id="@+id/search"
         android:title=""
         android:icon="@drawable/search"
@@ -32,9 +79,13 @@
         <item android:id="@+id/renaming"
             android:title="Renaming episodes" />
         <item android:id="@+id/favfirst"
-            android:title="Favorites first" />
+            android:title="Favorites first"
+            android:checkable="true"
+            />
         <item android:id="@+id/ignorearticle"
-            android:title="Ignore articles" />
+            android:title="Ignore articles"
+            android:checkable="true"
+            />
     </menu>
     </item>
     <item android:id="@+id/refresh"

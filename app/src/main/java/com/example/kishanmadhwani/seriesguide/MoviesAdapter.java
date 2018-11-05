@@ -1,7 +1,9 @@
 package com.example.kishanmadhwani.seriesguide;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -31,6 +33,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     private Context context;
    // private RecyclerViewClickListener mListener;
     String baseUrl="https://image.tmdb.org/t/p/w500",posterUrl;
+
 
     public static class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         LinearLayout moviesLayout;
@@ -92,7 +95,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         holder.popup1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                FeedReaderDbHelper mDbHelper = new FeedReaderDbHelper(context);
+                final SQLiteDatabase db = mDbHelper.getWritableDatabase();
                 //creating a popup menu
                 PopupMenu popup = new PopupMenu(context, holder.popup1);
                 //inflating menu from xml resource
@@ -101,11 +105,23 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
+                        ContentValues values;
                         switch (item.getItemId()) {
                             case R.id.addtocollection:
+                                 values = new ContentValues();
+                                values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE, movies.get(position).getTitle());
+                                values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_DATE, movies.get(position).getReleaseDate());
+                                long newRowId = db.insert(FeedReaderContract.FeedEntry.TABLE_NAME, null, values);
+                                Log.d("rowinserted",newRowId+"");
+                                //values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_COLLECTION, 1);
                                 Toast.makeText(context,"add to collection",Toast.LENGTH_SHORT).show();
                                 return true;
                             case R.id.addtowatchlist:
+                                 values = new ContentValues();
+                                values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE, movies.get(position).getTitle());
+                                values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_DATE, movies.get(position).getReleaseDate());
+                                long newRowId1 = db.insert(FeedReaderContract.FeedEntry.TABLE_NAME, null, values);
+                                //values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_WATCHLIST, 1);
                                 Toast.makeText(context,"add to watchlist",Toast.LENGTH_SHORT).show();
                                 return true;
                             default:

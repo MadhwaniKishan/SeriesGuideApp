@@ -2,6 +2,7 @@ package com.example.kishanmadhwani.seriesguide;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
