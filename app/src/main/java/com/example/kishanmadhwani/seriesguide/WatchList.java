@@ -3,7 +3,7 @@ package com.example.kishanmadhwani.seriesguide;
 public class WatchList {
     String date,title,posterpath;
 
-    public WatchList(String date, String title, String posterpath) {
+    public WatchList(String title, String date, String posterpath) {
         this.date = date;
         this.title = title;
         this.posterpath = posterpath;
