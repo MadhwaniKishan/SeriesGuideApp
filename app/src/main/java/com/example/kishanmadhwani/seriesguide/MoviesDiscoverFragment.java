@@ -38,8 +38,9 @@ public class MoviesDiscoverFragment extends Fragment  {
     ProgressDialog progress;
     Button popular,digital,disc;
     Intent i;
-    public MoviesDiscoverFragment() {
-        // Required empty public constructor
+    Context ctx;
+    public MoviesDiscoverFragment(){
+
     }
 
 
@@ -65,6 +66,7 @@ public class MoviesDiscoverFragment extends Fragment  {
         popular=view.findViewById(R.id.popular);
         disc=view.findViewById(R.id.disc);
         digital=view.findViewById(R.id.digital);
+        final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.theater_recycler_view);
         progress = new ProgressDialog(getContext());
         progress.setTitle("");
         progress.setMessage("");
@@ -102,7 +104,7 @@ public class MoviesDiscoverFragment extends Fragment  {
             return;
         }
 
-        final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.theater_recycler_view);
+
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
 
         ApiInterface apiService =
@@ -113,7 +115,7 @@ public class MoviesDiscoverFragment extends Fragment  {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
                 List<Movie> movies = response.body().getResults();
-                recyclerView.setAdapter(new MoviesAdapter(movies, R.layout.grid_item, getContext()));
+                recyclerView.setAdapter(new MoviesAdapter(movies, R.layout.grid_item,getActivity()));
                 progress.dismiss();
                 Log.d("numberofmovie", "Number of movies received: " + movies.size() + response.body().getResults());
             }

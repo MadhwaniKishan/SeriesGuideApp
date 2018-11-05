@@ -1,6 +1,7 @@
 package com.example.kishanmadhwani.seriesguide;
 
 
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -8,6 +9,9 @@ import android.provider.BaseColumns;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,7 +30,7 @@ public class MoviesWatchlistFragment extends Fragment {
 
     FeedReaderDbHelper mDbHelper ;
     SQLiteDatabase db;
-
+    ArrayList<WatchList> watchlist=new ArrayList<>();
     public MoviesWatchlistFragment() {
         // Required empty public constructor
     }
@@ -43,16 +47,20 @@ public class MoviesWatchlistFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mDbHelper = new FeedReaderDbHelper(getContext());
+        final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.theater_recycler_view);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
+        mDbHelper = new FeedReaderDbHelper(getActivity());
         if(mDbHelper!=null) {
+            Log.d("inyes","yes");
             db = mDbHelper.getReadableDatabase();
             String[] projection = {
                     BaseColumns._ID,
                     FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE,
-                    FeedReaderContract.FeedEntry.COLUMN_NAME_DATE
+                    FeedReaderContract.FeedEntry.COLUMN_NAME_DATE,
+                    FeedReaderContract.FeedEntry.COLUMN_NAME_POSTERPATH
             };
 
-            Cursor cursor = db.query(
+            Cursor c = db.query(
                     FeedReaderContract.FeedEntry.TABLE_NAME,   // The table to query
                     projection,             // The array of columns to return (pass null to get all)
                     null,
@@ -61,15 +69,22 @@ public class MoviesWatchlistFragment extends Fragment {
                     null,
                     null
             );
-            List itemIds = new ArrayList<>();
-            while (cursor.moveToNext()) {
-                long itemId = cursor.getLong(
-                        cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry._ID));
-                itemIds.add(itemId);
-                Log.d("database data", cursor.getString(cursor.getColumnIndex(FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE)));
-            }
-            cursor.close();
+            int i=0;
+            int titlecolumn=c.getColumnIndex(FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE);
+            int datecolumn=c.getColumnIndex(FeedReaderContract.FeedEntry.COLUMN_NAME_DATE);
+            int posterpathcolumn=c.getColumnIndex(FeedReaderContract.FeedEntry.COLUMN_NAME_POSTERPATH);
+                while (c.moveToNext()) {
+                    i++;
+                    long itemId = c.getLong(
+                            c.getColumnIndexOrThrow(FeedReaderContract.FeedEntry._ID));
+                        watchlist.add(new WatchList(c.getString(titlecolumn), c.getString((datecolumn)), c.getString(posterpathcolumn)));
+                    Log.d("watchlist", c.getString(titlecolumn) + "  " + c.getString(datecolumn) + "  " + c.getString(posterpathcolumn));
+                }
+                c.close();
         }
+
+
+        recyclerView.setAdapter(new WatchListAdapter(watchlist,R.layout.grid_item,getActivity()));
     }
 
     @Override

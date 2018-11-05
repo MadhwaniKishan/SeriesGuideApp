@@ -1,5 +1,6 @@
 package com.example.kishanmadhwani.seriesguide;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -30,6 +31,7 @@ public class NavigationDrawer extends AppCompatActivity {
     private DrawerLayout mDrawer;
     private NavigationView nvDrawer;
     FragmentManager fragmentManager;
+    Context ctx;
     Intent i;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,8 @@ public class NavigationDrawer extends AppCompatActivity {
         // Find our drawer view
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         nvDrawer=findViewById(R.id.nav_view);
-
+        ctx=getApplicationContext();
+       // this.deleteDatabase("SeriesGuide.db");
 
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.content_frame, new ShowsMainFragment()).commitNow();

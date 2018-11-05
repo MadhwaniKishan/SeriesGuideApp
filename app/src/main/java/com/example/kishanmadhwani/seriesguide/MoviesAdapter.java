@@ -2,8 +2,12 @@ package com.example.kishanmadhwani.seriesguide;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -20,6 +24,12 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,7 +41,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
      static List<Movie> movies;
     private int rowLayout;
     private Context context;
-   // private RecyclerViewClickListener mListener;
     String baseUrl="https://image.tmdb.org/t/p/w500",posterUrl;
 
 
@@ -70,6 +79,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         this.movies = movies;
         this.rowLayout = rowLayout;
         this.context = context;
+
        // mListener=listener;
     }
 
@@ -108,9 +118,15 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
                         ContentValues values;
                         switch (item.getItemId()) {
                             case R.id.addtocollection:
+//                                 Bitmap poster=convertToBitmap(baseUrl+movies.get(position).getPosterPath());
+                                Bitmap poster = ((BitmapDrawable)holder.iv.getDrawable()).getBitmap();
+                                 String name=movies.get(position).getPosterPath().substring(1);
+                                 String posterpath=saveToInternalStorage(poster,name);
+                                 Log.d("posterpath",posterpath);
                                  values = new ContentValues();
                                 values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE, movies.get(position).getTitle());
                                 values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_DATE, movies.get(position).getReleaseDate());
+                                values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_POSTERPATH,posterpath);
                                 long newRowId = db.insert(FeedReaderContract.FeedEntry.TABLE_NAME, null, values);
                                 Log.d("rowinserted",newRowId+"");
                                 //values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_COLLECTION, 1);
@@ -149,10 +165,10 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         String formattedDate = targetFormat.format(date);
             holder.movieTitle.setText(movies.get(position).getTitle());
             posterUrl = baseUrl + movies.get(position).getPosterPath();
+            Log.d("urlpath",movies.get(position).getPosterPath());
             holder.date.setText(formattedDate);
             Glide.with(context)
                     .load(posterUrl)
-                    //.apply(new RequestOptions().override(150, 200))
                     .into(holder.iv)
             ;
     }
@@ -160,5 +176,40 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     @Override
     public int getItemCount() {
         return movies.size();
+    }
+
+    private Bitmap convertToBitmap(String url){
+        Bitmap image=null;
+        try {
+            URL createdUrl = new URL(url);
+           image= BitmapFactory.decodeStream(createdUrl.openConnection().getInputStream());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return  image;
+    }
+
+    private String saveToInternalStorage(Bitmap bitmapImage,String name){
+        ContextWrapper cw = new ContextWrapper(context);
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+        File mypath=new File(directory,"profile.jpg");
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return directory.getAbsolutePath();
     }
 }
