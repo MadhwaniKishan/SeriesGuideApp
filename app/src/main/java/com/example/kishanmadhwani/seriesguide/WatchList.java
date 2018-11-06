@@ -2,11 +2,13 @@ package com.example.kishanmadhwani.seriesguide;
 
 public class WatchList {
     String date,title,posterpath;
+    int collection;
 
-    public WatchList(String title, String date, String posterpath) {
+    public WatchList(String title, String date, String posterpath,int collection) {
         this.date = date;
         this.title = title;
         this.posterpath = posterpath;
+        this.collection=collection;
     }
 
     public String getPosterpath() {
@@ -31,6 +33,14 @@ public class WatchList {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public int getCollection() {
+        return collection;
+    }
+
+    public void setCollection(int collection) {
+        this.collection = collection;
     }
 }
 

@@ -57,8 +57,10 @@ public class MoviesWatchlistFragment extends Fragment {
                     BaseColumns._ID,
                     FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE,
                     FeedReaderContract.FeedEntry.COLUMN_NAME_DATE,
-                    FeedReaderContract.FeedEntry.COLUMN_NAME_POSTERPATH
+                    FeedReaderContract.FeedEntry.COLUMN_NAME_POSTERPATH,
+                    FeedReaderContract.FeedEntry.COLUMN_NAME_COLLECTION
             };
+
 
             Cursor c = db.query(
                     FeedReaderContract.FeedEntry.TABLE_NAME,   // The table to query
@@ -73,12 +75,14 @@ public class MoviesWatchlistFragment extends Fragment {
             int titlecolumn=c.getColumnIndex(FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE);
             int datecolumn=c.getColumnIndex(FeedReaderContract.FeedEntry.COLUMN_NAME_DATE);
             int posterpathcolumn=c.getColumnIndex(FeedReaderContract.FeedEntry.COLUMN_NAME_POSTERPATH);
+            int colletion=c.getColumnIndex(FeedReaderContract.FeedEntry.COLUMN_NAME_COLLECTION);
                 while (c.moveToNext()) {
                     i++;
                     long itemId = c.getLong(
                             c.getColumnIndexOrThrow(FeedReaderContract.FeedEntry._ID));
-                        watchlist.add(new WatchList(c.getString(titlecolumn), c.getString((datecolumn)), c.getString(posterpathcolumn)));
-                    Log.d("watchlist", c.getString(titlecolumn) + "  " + c.getString(datecolumn) + "  " + c.getString(posterpathcolumn));
+                    if(c.getInt(colletion)==1)
+                        watchlist.add(new WatchList(c.getString(titlecolumn), c.getString((datecolumn)), c.getString(posterpathcolumn), c.getInt(colletion)));
+                    Log.d("watchlist", c.getString(titlecolumn) + "  " + c.getString(datecolumn) + "  " + c.getString(posterpathcolumn)+"  "+c.getString(colletion));
                 }
                 c.close();
         }

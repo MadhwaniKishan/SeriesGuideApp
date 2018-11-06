@@ -4,14 +4,17 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.provider.BaseColumns;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,10 +43,13 @@ import java.util.Locale;
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder> {
      static List<Movie> movies;
     private int rowLayout;
+    FeedReaderDbHelper mDbHelper ;
+    SQLiteDatabase db;
     private Context context;
     String baseUrl="https://image.tmdb.org/t/p/w500",posterUrl;
-
-
+    String collectionTitle="Add to collection";
+    int flag=0;
+    long row;
     public static class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         LinearLayout moviesLayout;
         TextView movieTitle;
@@ -52,6 +58,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         ImageView iv;
         Button popup1;
         Context ctx;
+
+
 
         public MovieViewHolder(View v,Context ctx) {
             super(v);
@@ -98,8 +106,42 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     }
 
 
+    private boolean queryCollection(int pos){
+        flag=0;
+        mDbHelper=new FeedReaderDbHelper(context);
+        db = mDbHelper.getReadableDatabase();
+        String[] projection = {
+                BaseColumns._ID,
+                FeedReaderContract.FeedEntry.COLUMN_NAME_COLLECTION
+        };
+        String selection = FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE + " = ?";
+        String[] selectionArgs = { movies.get(pos).getTitle()};
+
+        Cursor c = db.query(
+                FeedReaderContract.FeedEntry.TABLE_NAME,   // The table to query
+                projection,             // The array of columns to return (pass null to get all)
+                selection,
+                selectionArgs,                   // don't group the rows
+                null,        // The sort order
+                null,
+                null
+        );
+        int collectioncolumn=c.getColumnIndex(FeedReaderContract.FeedEntry.COLUMN_NAME_COLLECTION);
+        int collection=0;
+        while(c.moveToNext()) {
+           flag=1;
+           collection = c.getInt(collectioncolumn);
+           Log.d("collection",collection+" abc");
+        }
+        if(collection==0)
+        return false;
+        return true;
+    }
+
     @Override
     public void onBindViewHolder(final MoviesAdapter.MovieViewHolder holder, final int position) {
+
+
 
 
         holder.popup1.setOnClickListener(new View.OnClickListener() {
@@ -107,35 +149,60 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
             public void onClick(View view) {
                 FeedReaderDbHelper mDbHelper = new FeedReaderDbHelper(context);
                 final SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+                if(queryCollection(position)==true){
+                    collectionTitle="Remove from collection";
+                }
+                else
+                    collectionTitle="Add to collection";
                 //creating a popup menu
                 PopupMenu popup = new PopupMenu(context, holder.popup1);
                 //inflating menu from xml resource
                 popup.inflate(R.menu.moviemenu);
+                final Menu menuOpts = popup.getMenu();
+                menuOpts.getItem(1).setTitle(collectionTitle);
                 //adding click listener
+
+
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
+                        Bitmap poster;
                         ContentValues values;
+                        String name,posterpath;
                         switch (item.getItemId()) {
+
                             case R.id.addtocollection:
-//                                 Bitmap poster=convertToBitmap(baseUrl+movies.get(position).getPosterPath());
-                                Bitmap poster = ((BitmapDrawable)holder.iv.getDrawable()).getBitmap();
-                                 String name=movies.get(position).getPosterPath().substring(1);
-                                 String posterpath=saveToInternalStorage(poster,name);
-                                 Log.d("posterpath",posterpath);
+                                poster = ((BitmapDrawable) holder.iv.getDrawable()).getBitmap();
+                                name = movies.get(position).getPosterPath().substring(1);
+                                posterpath = saveToInternalStorage(poster, name);
+                                Log.d("posterpath", posterpath);
+                                values = new ContentValues();
+                                values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE, movies.get(position).getTitle());
+                                values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_DATE, movies.get(position).getReleaseDate());
+                                values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_POSTERPATH, name);
+                                if(collectionTitle.equals("Remove from collection")) {
+                                    values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_COLLECTION,0);
+                                    Toast.makeText(context, "remove from collection", Toast.LENGTH_SHORT).show();
+                                }
+                                else{
+                                    values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_COLLECTION,1);
+                                }
+                                if(flag==0){
+                                  row=db.insert(FeedReaderContract.FeedEntry.TABLE_NAME,null,values);
+                                }
+                                else
+                                row= db.update(FeedReaderContract.FeedEntry.TABLE_NAME,values,FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE+"="+movies.get(position).getTitle(),null);
+                                Log.d("row",row+"");
+                                return true;
+                            case R.id.addtowatchlist:
+                                poster = ((BitmapDrawable)holder.iv.getDrawable()).getBitmap();
+                                name=movies.get(position).getPosterPath().substring(1);
+                                posterpath=saveToInternalStorage(poster,name);
                                  values = new ContentValues();
                                 values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE, movies.get(position).getTitle());
                                 values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_DATE, movies.get(position).getReleaseDate());
                                 values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_POSTERPATH,name);
-                                long newRowId = db.insert(FeedReaderContract.FeedEntry.TABLE_NAME, null, values);
-                                Log.d("rowinserted",newRowId+"");
-                                //values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_COLLECTION, 1);
-                                Toast.makeText(context,"add to collection",Toast.LENGTH_SHORT).show();
-                                return true;
-                            case R.id.addtowatchlist:
-                                 values = new ContentValues();
-                                values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE, movies.get(position).getTitle());
-                                values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_DATE, movies.get(position).getReleaseDate());
                                 long newRowId1 = db.insert(FeedReaderContract.FeedEntry.TABLE_NAME, null, values);
                                 //values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_WATCHLIST, 1);
                                 Toast.makeText(context,"add to watchlist",Toast.LENGTH_SHORT).show();
@@ -178,17 +245,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         return movies.size();
     }
 
-    private Bitmap convertToBitmap(String url){
-        Bitmap image=null;
-        try {
-            URL createdUrl = new URL(url);
-           image= BitmapFactory.decodeStream(createdUrl.openConnection().getInputStream());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return  image;
-    }
 
     private String saveToInternalStorage(Bitmap bitmapImage,String name){
         ContextWrapper cw = new ContextWrapper(context);
