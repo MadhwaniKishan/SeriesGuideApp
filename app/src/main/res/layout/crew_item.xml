@@ -20,6 +20,7 @@
         android:id="@+id/actorname"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="15dp"
+        android:text="@string/actorname"
         android:textColor="@color/primary_text"
         android:layout_toRightOf="@+id/actorphoto"
         />
@@ -31,6 +32,7 @@
         android:layout_marginLeft="15dp"
         android:textColor="@color/primary_text"
         android:textSize="12dp"
+        android:text="@string/character"
         android:layout_toRightOf="@+id/actorphoto"
         />
 </RelativeLayout>

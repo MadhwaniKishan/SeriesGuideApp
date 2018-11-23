@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DiscoverFragment"
+    tools:context=".fragment.DiscoverFragment"
     >
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
@@ -19,7 +19,7 @@
     android:id="@+id/popular"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Popular"
+    android:text="@string/popular"
     android:layout_margin="10dp"
     android:background="@color/buttoncolor"
     />

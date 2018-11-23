@@ -7,7 +7,7 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:id="@+id/popular"
-        android:text="Popular"
+        android:text="@string/popular"
         />
     <Button
         android:layout_width="150dp"
@@ -15,19 +15,19 @@
         android:id="@+id/digital"
         android:layout_toRightOf="@+id/popular"
         android:layout_marginLeft="5dp"
-        android:text="Digital release"
+        android:text="@string/digital_release"
         />
     <Button
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:id="@+id/disc"
-        android:text="disc release"
+        android:text="@string/disc_release"
         android:layout_below="@+id/popular"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="In theaters"
+        android:text="@string/in_theaters"
         android:id="@+id/theater"
         android:layout_below="@+id/disc"
         android:layout_marginTop="10dp"

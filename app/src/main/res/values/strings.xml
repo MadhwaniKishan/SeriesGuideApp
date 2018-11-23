@@ -1,10 +1,23 @@
 <resources>
     <string name="app_name">SeriesGuide</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="shows">SHOWS</string>
     <string name="history">HISTORY</string>
     <string name="recent">RECENT</string>
     <string name="upcoming">UPCOMING</string>
+    <string name="biography">Biography</string>
+    <string name="boidetail">boidetail</string>
+    <string name="personname">personname</string>
+    <string name="actorname">actorname</string>
+    <string name="character">character</string>
+    <string name="title">title</string>
+    <string name="date">date</string>
+    <string name="description">description</string>
+    <string name="popular">Popular</string>
+    <string name="in_theaters">In theaters</string>
+    <string name="disc_release">disc release</string>
+    <string name="trakt_nconnect_trakt">trakt Connect trakt</string>
+    <string name="seriesguide_cloud_nsign_in">SeriesGuide Cloud Sign In</string>
+    <string name="digital_release">digital release</string>
 </resources>

@@ -17,9 +17,8 @@
         android:background="@color/colorPrimary"
         android:gravity="left"
         android:layout_marginTop="10dp"
-        android:text="trakt\nConnect trakt"
+        android:text="@string/trakt_nconnect_trakt"
         android:textAllCaps="false"
-
         android:padding="10dp"
         style="?android:attr/colorFocusedHighlight"
         />
@@ -32,7 +31,7 @@
         android:background="@color/colorPrimary"
         android:gravity="left"
         android:padding="10dp"
-        android:text="SeriesGuide Cloud\nSign In"
+        android:text="@string/seriesguide_cloud_nsign_in"
         android:textAllCaps="false"
         style="?android:attr/colorFocusedHighlight"
         android:layout_marginBottom="2dp"

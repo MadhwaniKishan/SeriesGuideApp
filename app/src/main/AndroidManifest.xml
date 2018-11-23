@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NavigationDrawer"
+        <activity android:name=".activity.NavigationDrawerActivity"
             android:theme="@style/AppTheme"
             >
             <intent-filter>
@@ -20,12 +20,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Help" />
-        <activity android:name=".Settings" />
-        <activity android:name=".Unlock" />
+        <activity android:name=".activity.HelpActivity" />
+        <activity android:name=".activity.SettingsActivity" />
+        <activity android:name=".activity.UnlockActivity" />
         <activity
-            android:name=".AddNewShows"
-            android:parentActivityName=".NavigationDrawer">
+            android:name=".activity.AddNewShowsActivity"
+            android:parentActivityName=".activity.NavigationDrawerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -34,20 +34,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Popular"
-            android:parentActivityName=".AddNewShows" />
+            android:name=".activity.PopularActivity"
+            android:parentActivityName=".activity.AddNewShowsActivity" />
         <activity
-            android:name=".PopularMovies"
-            android:parentActivityName=".NavigationDrawer" />
+            android:name=".activity.PopularMoviesActivity"
+            android:parentActivityName=".activity.NavigationDrawerActivity" />
         <activity
-            android:name=".DiscMovies"
-            android:parentActivityName=".NavigationDrawer" />
+            android:name=".activity.DiscMoviesActivity"
+            android:parentActivityName=".activity.NavigationDrawerActivity" />
         <activity
-            android:name=".DigitalMovies"
-            android:parentActivityName=".NavigationDrawer" />
-        <activity android:name=".MovieDetail" />
-        <activity android:name=".showAllCredits" />
-        <activity android:name=".PersonDetail"></activity>
+            android:name=".activity.DigitalMoviesActivity"
+            android:parentActivityName=".activity.NavigationDrawerActivity" />
+        <activity android:name=".activity.MovieDetailActivity" />
+        <activity android:name=".activity.ShowAllCreditsActivity" />
+        <activity android:name=".activity.PersonDetailActivity"></activity>
     </application>
 
 </manifest>
